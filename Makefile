@@ -1,6 +1,6 @@
 
 compile:
-	docker run -i --name coreboot-build -t "eyedeekay/coreboot-dockerfile"
+	docker run -i --name coreboot-build -t "eyedeekay/coreboot-dockerfile" make
 
 build:
 	docker build -f Dockerfile -t "eyedeekay/coreboot-dockerfile" .

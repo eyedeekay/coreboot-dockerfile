@@ -6,5 +6,5 @@ RUN git clone https://review.coreboot.org/coreboot /home/coreboot/coreboot
 WORKDIR /home/coreboot/coreboot
 RUN git submodule update --init --checkout
 RUN make iasl
-RUN make toolchains
+RUN make
 ENTRYPOINT [ "bash", "-i", "-c" ]

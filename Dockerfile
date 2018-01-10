@@ -7,19 +7,19 @@ WORKDIR /home/coreboot/coreboot
 RUN git submodule update --init --checkout
 RUN make iasl
 RUN make crossgcc-i386
-RUN make crossgcc-x64
-RUN make crossgcc-arm
-RUN make crossgcc-aarch64
-RUN make crossgcc-mips
-RUN make crossgcc-riscv
-RUN make crossgcc-power8
-RUN make crossgcc-nds32le
 RUN make crosstools-i386
+RUN make crossgcc-x64
 RUN make crosstools-x64
+RUN make crossgcc-arm
 RUN make crosstools-arm
+RUN make crossgcc-aarch64
 RUN make crosstools-aarch64
+RUN make crossgcc-mips
 RUN make crosstools-mips
+RUN make crossgcc-riscv
 RUN make crosstools-riscv
+RUN make crossgcc-power8
 RUN make crosstools-power8
+RUN make crossgcc-nds32le
 RUN make crosstools-nds32le
 ENTRYPOINT [ "bash", "-i", "-c" ]

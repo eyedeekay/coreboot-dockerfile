@@ -7,10 +7,20 @@ readout:
 		--name coreboot-readout \
 		-t "eyedeekay/coreboot-dockerfile" 'cat .config'
 
-compile:
+clean:
+	rm *log *err
+
+debug:
+	docker rm -f coreboot-build; \
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-build \
-		-t "eyedeekay/coreboot-dockerfile" make
+		-t "eyedeekay/tlhab" 'make -i --debug=v'
+
+compile:
+	docker rm -f coreboot-build; \
+	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
+		--name coreboot-build \
+		-t "eyedeekay/tlhab" 'make'
 
 build:
 	docker build -f Dockerfile -t "eyedeekay/coreboot-dockerfile" .
@@ -28,15 +38,17 @@ better-build:
 	docker build -f Dockerfiles/Dockerfile -t "eyedeekay/coreboot-dockerfile" .
 
 run:
-	docker run -i --name coreboot -t "eyedeekay/coreboot-dockerfile"
+	docker rm -f coreboot; \
+	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
+		--name coreboot -t "eyedeekay/tlhab" bash
 
 menuconfig:
-	docker run -i --name coreboot-config -t "eyedeekay/coreboot-dockerfile" 'make menuconfig'
+	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make menuconfig'
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
 
 nconfig:
-	docker run -i --name coreboot-config -t "eyedeekay/coreboot-dockerfile" 'make nconfig'
+	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make nconfig'
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
 

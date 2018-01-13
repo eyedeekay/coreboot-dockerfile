@@ -1,2 +1,3 @@
 FROM eyedeekay/coreboot-dockerfile
-#RUN git
+COPY vendor/alienware /home/coreboot/coreboot/src/mainboard/alienware
+ENTRYPOINT [ "bash", "-i", "-c" ]

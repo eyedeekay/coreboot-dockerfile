@@ -1,0 +1,3 @@
+FROM eyedeekay/coreboot-dockerfile:riscv
+RUN make crossgcc-power8
+RUN make crosstools-power8

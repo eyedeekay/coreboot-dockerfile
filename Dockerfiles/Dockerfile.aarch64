@@ -1,0 +1,3 @@
+FROM eyedeekay/coreboot-dockerfile:arm
+RUN make crossgcc-aarch64
+RUN make crosstools-aarch64

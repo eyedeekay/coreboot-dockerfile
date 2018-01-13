@@ -1,0 +1,3 @@
+FROM eyedeekay/coreboot-dockerfile:deps
+RUN make crossgcc-i386
+RUN make crosstools-i386

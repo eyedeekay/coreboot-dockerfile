@@ -1,0 +1,3 @@
+FROM eyedeekay/coreboot-dockerfile:power8
+RUN make crossgcc-nds32le
+RUN make crosstools-nds32le

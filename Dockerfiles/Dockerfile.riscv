@@ -1,0 +1,3 @@
+FROM eyedeekay/coreboot-dockerfile:mips
+RUN make crossgcc-riscv
+RUN make crosstools-riscv

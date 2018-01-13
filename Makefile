@@ -14,7 +14,7 @@ debug:
 	docker rm -f coreboot-build; \
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-build \
-		-t "eyedeekay/tlhab" 'make --debug=v; make --debug=v'
+		-t "eyedeekay/tlhab" 'make --debug=v && make --debug=v'
 
 compile:
 	docker rm -f coreboot-build; \

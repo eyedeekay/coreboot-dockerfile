@@ -1,5 +1,7 @@
 export PWD = $(shell pwd)
 
+#source config.mk
+
 readout:
 	docker run -i --rm -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-readout \
@@ -38,6 +40,6 @@ nconfig:
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
 
-
 child:
 	docker build -f Dockerfile.tlhab -t "eyedeekay/tlhab" .
+

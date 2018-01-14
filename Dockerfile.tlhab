@@ -1,7 +1,7 @@
 FROM eyedeekay/coreboot-dockerfile
 USER root
 #RUN apt-get update
-RUN apt-get install -y python3 python autoconf
+RUN apt-get install -y python3 python autoconf libfreetype6-dev unifont
 USER coreboot
 COPY vendor/alienware /home/coreboot/coreboot/src/mainboard/alienware
 COPY .config /home/coreboot/coreboot

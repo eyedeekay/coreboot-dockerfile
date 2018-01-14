@@ -69,6 +69,7 @@ kconfopts:
 	docker run -i --name coreboot-kconfig-readout -t eyedeekay/tlhab "find /home/coreboot/coreboot -iname Kconfig -exec grep -i -H -A 3 -B 3 select '{}' \; -exec echo \;" | tee -a Kconfig_options
 
 copy:
+	rm -rf build
 	docker cp coreboot-build:/home/coreboot/coreboot/build .
 
 copy-utils:

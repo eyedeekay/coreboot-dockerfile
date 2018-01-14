@@ -2,6 +2,3 @@
     path = vendor
     url = https://github.com/eyedeekay/vendor.git
 
-[submodule "vendor"]
-    path = vendor
-    url = https://github.com/eyedeekay/vendor.git

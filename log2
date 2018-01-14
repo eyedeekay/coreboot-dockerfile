@@ -1,0 +1,488 @@
+docker rm -f coreboot-build; \
+docker run -i -v /home/idk/local-manifest/distro-manifest/coreboot-dockerfile/.config:/home/coreboot/coreboot/.config \
+	--name coreboot-build \
+	-t "eyedeekay/tlhab" 'make'
+coreboot-build
+Skipping submodule '3rdparty/blobs'
+    HOSTCC     util/sconfig/lex.yy.o
+    HOSTCC     util/sconfig/sconfig.tab.o
+    HOSTCC     util/sconfig/main.o
+    HOSTCC     util/sconfig/sconfig (link)
+    SCONFIG    mainboard/alienware/m11xr1/devicetree.cb
+    HOSTCC     nvramtool/cli/nvramtool.o
+    HOSTCC     nvramtool/cli/opts.o
+    HOSTCC     nvramtool/cmos_lowlevel.o
+    HOSTCC     nvramtool/cmos_ops.o
+    HOSTCC     nvramtool/common.o
+    HOSTCC     nvramtool/compute_ip_checksum.o
+    HOSTCC     nvramtool/hexdump.o
+    HOSTCC     nvramtool/input_file.o
+    HOSTCC     nvramtool/layout.o
+    HOSTCC     nvramtool/accessors/layout-common.o
+    HOSTCC     nvramtool/accessors/layout-text.o
+    HOSTCC     nvramtool/accessors/layout-bin.o
+    HOSTCC     nvramtool/lbtable.o
+    HOSTCC     nvramtool/reg_expr.o
+    HOSTCC     nvramtool/cbfs.o
+    HOSTCC     nvramtool/accessors/cmos-mem.o
+    HOSTCC     nvramtool/nvramtool (link)
+    OPTION     option_table.h
+    CC         bootblock/mainboard/alienware/m11xr1/static.o
+    CC         bootblock/arch/x86/boot.o
+    GEN        generated/bootblock.ld
+    CP         bootblock/arch/x86/bootblock.ld
+    HOSTCC     util/romcc/romcc (this may take a while)
+    ROMCC      generated/bootblock.inc
+    CC         bootblock/arch/x86/bootblock_romcc.o
+    CC         bootblock/arch/x86/cpu_common.o
+    GEN        build.h
+    CC         bootblock/arch/x86/id.o
+    CC         bootblock/arch/x86/memcpy.o
+    CC         bootblock/arch/x86/memset.o
+    CC         bootblock/arch/x86/mmap_boot.o
+    CC         bootblock/arch/x86/timestamp.o
+    CC         bootblock/arch/x86/walkcbfs.o
+    CC         bootblock/commonlib/cbfs.o
+    CC         bootblock/commonlib/iobuf.o
+    CC         bootblock/commonlib/lz4_wrapper.o
+    CC         bootblock/commonlib/mem_pool.o
+    CC         bootblock/commonlib/region.o
+    CC         bootblock/console/die.o
+    CC         bootblock/console/post.o
+    CC         bootblock/console/vsprintf.o
+    CC         bootblock/console/vtxprintf.o
+    CC         bootblock/cpu/x86/lapic/boot_cpu.o
+    CC         bootblock/cpu/x86/mtrr/earlymtrr.o
+    CC         bootblock/device/device_simple.o
+    CC         bootblock/device/i2c.o
+    CC         bootblock/drivers/pc80/rtc/mc146818rtc.o
+    CC         bootblock/drivers/pc80/rtc/mc146818rtc_boot.o
+    CC         bootblock/drivers/spi/spi-generic.o
+    CC         bootblock/lib/boot_device.o
+    CC         bootblock/lib/bootmode.o
+    HOSTCC     cbfstool/fmaptool.o
+    HOSTCC     cbfstool/cbfs_sections.o
+    HOSTCC     cbfstool/fmap_from_fmd.o
+    HOSTCC     cbfstool/fmd.o
+    HOSTCC     cbfstool/fmd_parser.o
+    HOSTCC     cbfstool/fmd_scanner.o
+    HOSTCC     cbfstool/fmap.o
+    HOSTCC     cbfstool/kv_pair.o
+    HOSTCC     cbfstool/valstr.o
+    HOSTCC     cbfstool/fmaptool (link)
+    FMAP       build/util/cbfstool/fmaptool -h build/fmap_config.h build/fmap.fmd build/fmap.fmap
+SUCCESS: Wrote 182 bytes to file 'build/fmap.fmap' (and generated header)
+The sections containing CBFSes are: COREBOOT
+    CC         bootblock/lib/cbfs.o
+    CC         bootblock/lib/cbmem_console.o
+    CC         bootblock/lib/delay.o
+    CC         bootblock/lib/fmap.o
+    CC         bootblock/lib/gcc.o
+    CC         bootblock/lib/halt.o
+    CC         bootblock/lib/hexdump.o
+    CC         bootblock/lib/libgcc.o
+    CC         bootblock/lib/memchr.o
+    CC         bootblock/lib/memcmp.o
+    CC         bootblock/lib/prog_loaders.o
+    CC         bootblock/lib/prog_ops.o
+    CC         bootblock/lib/reset.o
+    CC         bootblock/lib/timestamp.o
+    CC         bootblock/lib/version.o
+    LINK       cbfs/fallback/bootblock.debug
+    OBJCOPY    cbfs/fallback/bootblock.elf
+    OBJCOPY    bootblock.raw.bin
+    CC         romstage/mainboard/alienware/m11xr1/static.o
+    CC         romstage/arch/x86/acpi_s3.o
+    GEN        generated/assembly.inc
+    CC         romstage/arch/x86/assembly_entry.o
+    CC         romstage/arch/x86/boot.o
+    CC         romstage/arch/x86/cbfs_and_run.o
+    CC         romstage/arch/x86/cbmem.o
+    CC         romstage/arch/x86/cpu_common.o
+    CC         romstage/arch/x86/memcpy.o
+    CP         romstage/arch/x86/memlayout.ld
+    CC         romstage/arch/x86/memmove.o
+    CC         romstage/arch/x86/memset.o
+    CC         romstage/arch/x86/mmap_boot.o
+    CC         romstage/arch/x86/postcar_loader.o
+    CC         romstage/arch/x86/timestamp.o
+    CC         romstage/commonlib/cbfs.o
+    CC         romstage/commonlib/iobuf.o
+    CC         romstage/commonlib/lz4_wrapper.o
+    CC         romstage/commonlib/mem_pool.o
+    CC         romstage/commonlib/region.o
+    CC         romstage/console/console.o
+    CC         romstage/console/die.o
+    CC         romstage/console/init.o
+    CC         romstage/console/post.o
+    CC         romstage/console/printk.o
+    CC         romstage/console/vsprintf.o
+    CC         romstage/console/vtxprintf.o
+    CC         romstage/cpu/intel/car/romstage.o
+    CC         romstage/cpu/intel/microcode/microcode.o
+    CC         romstage/cpu/x86/car.o
+    CC         romstage/cpu/x86/lapic/apic_timer.o
+    CC         romstage/cpu/x86/lapic/boot_cpu.o
+    CC         romstage/cpu/x86/mtrr/earlymtrr.o
+    CC         romstage/device/device_simple.o
+    CC         romstage/device/dram/ddr2.o
+    CC         romstage/device/dram/ddr3.o
+    CC         romstage/device/i2c.o
+    CC         romstage/device/pci_early.o
+    CC         romstage/drivers/pc80/rtc/mc146818rtc.o
+    CC         romstage/drivers/spi/spi-generic.o
+    CC         romstage/ec/acpi/ec.o
+    CC         romstage/lib/boot_device.o
+    CC         romstage/lib/bootmode.o
+    CC         romstage/lib/cbfs.o
+    CC         romstage/lib/cbmem_common.o
+    CC         romstage/lib/cbmem_console.o
+    CC         romstage/lib/cbmem_stage_cache.o
+    CC         romstage/lib/compute_ip_checksum.o
+    CC         romstage/lib/delay.o
+    CC         romstage/lib/fmap.o
+    CC         romstage/lib/gcc.o
+    CC         romstage/lib/halt.o
+    CC         romstage/lib/hexdump.o
+    CC         romstage/lib/imd.o
+    CC         romstage/lib/imd_cbmem.o
+    CC         romstage/lib/libgcc.o
+    CC         romstage/lib/lzma.o
+    CC         romstage/lib/lzmadecode.o
+    CC         romstage/lib/memchr.o
+    CC         romstage/lib/memcmp.o
+    CC         romstage/lib/memrange.o
+    CC         romstage/lib/prog_loaders.o
+    CC         romstage/lib/prog_ops.o
+    CP         romstage/lib/program.ld
+    CC         romstage/lib/ramtest.o
+    CC         romstage/lib/region_file.o
+    CC         romstage/lib/reset.o
+    CC         romstage/lib/rmodule.o
+    CC         romstage/lib/romstage_handoff.o
+    CC         romstage/lib/romstage_stack.o
+    CC         romstage/lib/spd_bin.o
+    CC         romstage/lib/stack.o
+    CC         romstage/lib/timestamp.o
+    CC         romstage/lib/version.o
+    CC         romstage/mainboard/alienware/m11xr1/romstage.o
+    CC         romstage/northbridge/intel/gm45/early_init.o
+    CC         romstage/northbridge/intel/gm45/early_reset.o
+    CC         romstage/northbridge/intel/gm45/igd.o
+    CC         romstage/northbridge/intel/gm45/iommu.o
+    CC         romstage/northbridge/intel/gm45/pcie.o
+    CC         romstage/northbridge/intel/gm45/pm.o
+    CC         romstage/northbridge/intel/gm45/ram_calc.o
+    CC         romstage/northbridge/intel/gm45/raminit.o
+    CC         romstage/northbridge/intel/gm45/raminit_rcomp_calibration.o
+    CC         romstage/northbridge/intel/gm45/raminit_read_write_training.o
+    CC         romstage/northbridge/intel/gm45/raminit_receive_enable_calibration.o
+    CC         romstage/northbridge/intel/gm45/thermal.o
+    CC         romstage/southbridge/intel/common/gpio.o
+    CC         romstage/southbridge/intel/common/smbus.o
+    CC         romstage/southbridge/intel/i82801ix/dmi_setup.o
+    CC         romstage/southbridge/intel/i82801ix/early_init.o
+    CC         romstage/southbridge/intel/i82801ix/early_smbus.o
+    LINK       cbfs/fallback/romstage.debug
+    OBJCOPY    cbfs/fallback/romstage.elf
+    CC         ramstage/superio/common/conf_mode.o
+    CC         ramstage/southbridge/intel/i82801ix/hdaudio.o
+    CC         ramstage/southbridge/intel/i82801ix/i82801ix.o
+    CC         ramstage/southbridge/intel/i82801ix/lpc.o
+    CC         ramstage/southbridge/intel/i82801ix/pci.o
+    CC         ramstage/southbridge/intel/i82801ix/pcie.o
+    CC         ramstage/southbridge/intel/i82801ix/sata.o
+    CC         ramstage/southbridge/intel/i82801ix/smbus.o
+    CC         ramstage/southbridge/intel/i82801ix/smi.o
+    CC         ramstage/southbridge/intel/i82801ix/thermal.o
+    CC         ramstage/southbridge/intel/i82801ix/usb_ehci.o
+    CC         ramstage/southbridge/intel/i82801gx/reset.o
+    CC         ramstage/southbridge/intel/i82801gx/watchdog.o
+    CC         ramstage/southbridge/intel/common/gpio.o
+    CC         ramstage/southbridge/intel/common/pciehp.o
+    CC         ramstage/southbridge/intel/common/smbus.o
+    CC         ramstage/northbridge/intel/gm45/acpi.o
+    CC         ramstage/northbridge/intel/gm45/gma.o
+    CC         ramstage/northbridge/intel/gm45/northbridge.o
+    CC         ramstage/northbridge/intel/gm45/ram_calc.o
+    CC         ramstage/mainboard/alienware/m11xr1/static.o
+    CC         ramstage/mainboard/alienware/m11xr1/acpi_tables.o
+    CC         ramstage/mainboard/alienware/m11xr1/blc.o
+    CC         ramstage/mainboard/alienware/m11xr1/cstates.o
+    CC         ramstage/mainboard/alienware/m11xr1/ec.o
+    CC         ramstage/mainboard/alienware/m11xr1/fadt.o
+    CC         ramstage/mainboard/alienware/m11xr1/hda_verb.o
+    CC         ramstage/mainboard/alienware/m11xr1/mainboard.o
+    CC         ramstage/mainboard/alienware/m11xr1/mptable.o
+    CC         ramstage/lib/b64_decode.o
+    CC         ramstage/lib/boot_device.o
+    CC         ramstage/lib/bootmem.o
+    CC         ramstage/lib/bootmode.o
+    CC         ramstage/lib/cbfs.o
+    CC         ramstage/lib/cbmem_common.o
+    CC         ramstage/lib/cbmem_console.o
+    CC         ramstage/lib/cbmem_stage_cache.o
+    CC         ramstage/lib/compute_ip_checksum.o
+    CC         ramstage/lib/coreboot_table.o
+    CC         ramstage/lib/delay.o
+    CC         ramstage/lib/edid.o
+    CC         ramstage/lib/edid_fill_fb.o
+    CC         ramstage/lib/fallback_boot.o
+    CC         ramstage/lib/fmap.o
+    CC         ramstage/lib/gcc.o
+    CC         ramstage/lib/halt.o
+    CC         ramstage/lib/hardwaremain.o
+    CC         ramstage/lib/hexdump.o
+    CC         ramstage/lib/hexstrtobin.o
+    CC         ramstage/lib/imd.o
+    CC         ramstage/lib/imd_cbmem.o
+    CC         ramstage/lib/lzma.o
+    CC         ramstage/lib/lzmadecode.o
+    CC         ramstage/lib/malloc.o
+    CC         ramstage/lib/memchr.o
+    CC         ramstage/lib/memcmp.o
+    CC         ramstage/lib/memrange.o
+    CC         ramstage/lib/prog_loaders.o
+    CC         ramstage/lib/prog_ops.o
+    CC         ramstage/lib/region_file.o
+    CC         ramstage/lib/reset.o
+    CC         ramstage/lib/rmodule.o
+    CC         ramstage/lib/romstage_handoff.o
+    CC         ramstage/lib/romstage_stack.o
+    CC         ramstage/lib/rtc.o
+    CC         ramstage/lib/selfboot.o
+    CC         ramstage/lib/stack.o
+    CC         ramstage/lib/timestamp.o
+    CC         ramstage/lib/version.o
+    CC         ramstage/lib/wrdd.o
+    CC         ramstage/ec/compal/ene932/ec.o
+    CC         ramstage/ec/acpi/ec.o
+    CC         ramstage/drivers/spi/spi-generic.o
+    CC         ramstage/drivers/pc80/vga/vga.o
+    CC         ramstage/drivers/pc80/vga/vga_font_8x16.o
+    CC         ramstage/drivers/pc80/vga/vga_io.o
+    CC         ramstage/drivers/pc80/vga/vga_palette.o
+    CC         ramstage/drivers/pc80/rtc/mc146818rtc.o
+    CC         ramstage/drivers/pc80/pc/i8254.o
+    CC         ramstage/drivers/pc80/pc/i8259.o
+    CC         ramstage/drivers/pc80/pc/isa-dma.o
+    CC         ramstage/drivers/pc80/pc/keyboard.o
+    CC         ramstage/drivers/intel/wifi/wifi.o
+    CC         ramstage/drivers/intel/gma/acpi.o
+    CC         ramstage/drivers/intel/gma/edid.o
+    CC         ramstage/drivers/intel/gma/opregion.o
+    CC         ramstage/drivers/intel/gma/vbt.o
+    CC         ramstage/drivers/generic/ioapic/ioapic.o
+    CC         ramstage/device/cardbus_device.o
+    CC         ramstage/device/cpu_device.o
+    CC         ramstage/device/device.o
+    CC         ramstage/device/device_util.o
+    CC         ramstage/device/i2c.o
+    CC         ramstage/device/i2c_bus.o
+    CC         ramstage/device/pci_class.o
+    CC         ramstage/device/pci_device.o
+    CC         ramstage/device/pci_early.o
+    CC         ramstage/device/pci_ops.o
+    CC         ramstage/device/pci_rom.o
+    CC         ramstage/device/pciexp_device.o
+    CC         ramstage/device/pcix_device.o
+    CC         ramstage/device/pnp_device.o
+    CC         ramstage/device/root_device.o
+    CC         ramstage/device/smbus_ops.o
+    CC         smm/arch/x86/memcpy.o
+    CC         smm/arch/x86/memmove.o
+    CC         smm/arch/x86/memset.o
+    CC         smm/arch/x86/mmap_boot.o
+    CC         smm/commonlib/cbfs.o
+    CC         smm/commonlib/iobuf.o
+    CC         smm/commonlib/region.o
+    CC         smm/cpu/x86/lapic/apic_timer.o
+    CC         smm/cpu/x86/smm/smihandler.o
+    CC         smm/cpu/x86/smm/smmhandler.o
+    CC         smm/drivers/pc80/rtc/mc146818rtc.o
+    CC         smm/ec/acpi/ec.o
+    CC         smm/ec/compal/ene932/ec.o
+    CC         smm/lib/boot_device.o
+    CC         smm/lib/cbfs.o
+    CC         smm/lib/delay.o
+    CC         smm/lib/fmap.o
+    CC         smm/lib/gcc.o
+    CC         smm/lib/halt.o
+    CC         smm/lib/hexdump.o
+    CC         smm/lib/memcmp.o
+    CC         smm/lib/reset.o
+    CC         smm/lib/version.o
+    CC         smm/southbridge/intel/common/gpio.o
+    CC         smm/southbridge/intel/i82801ix/smihandler.o
+    OBJCOPY    ramstage/cpu/x86/smm/smm.manual
+    CC         ramstage/cpu/x86/smm/smm_module_loader.o
+    CC         ramstage/cpu/x86/smm/smmrelocate.o
+    CC         ramstage/cpu/x86/name/name.o
+    CC         ramstage/cpu/x86/mtrr/mtrr.o
+    CC         ramstage/cpu/x86/lapic/apic_timer.o
+    CC         ramstage/cpu/x86/lapic/boot_cpu.o
+    CC         ramstage/cpu/x86/lapic/lapic.o
+    CC         ramstage/cpu/x86/lapic/lapic_cpu_init.o
+    CC         ramstage/cpu/x86/lapic/secondary.o
+    CC         ramstage/cpu/x86/cache/cache.o
+    CC         ramstage/cpu/x86/backup_default_smm.o
+    CC         ramstage/cpu/intel/speedstep/acpi.o
+    CC         ramstage/cpu/intel/speedstep/speedstep.o
+    CC         ramstage/cpu/intel/model_1067x/model_1067x_init.o
+    CC         ramstage/cpu/intel/microcode/microcode.o
+    CC         ramstage/cpu/intel/hyperthreading/intel_sibling.o
+    CC         ramstage/cpu/intel/common/common_init.o
+    CC         ramstage/console/console.o
+    CC         ramstage/console/die.o
+    CC         ramstage/console/init.o
+    CC         ramstage/console/post.o
+    CC         ramstage/console/printk.o
+    CC         ramstage/console/vsprintf.o
+    CC         ramstage/console/vtxprintf.o
+    CC         ramstage/commonlib/cbfs.o
+    CC         ramstage/commonlib/iobuf.o
+    CC         ramstage/commonlib/lz4_wrapper.o
+    CC         ramstage/commonlib/mem_pool.o
+    CC         ramstage/commonlib/region.o
+    CC         ramstage/arch/x86/acpi.o
+    CC         ramstage/arch/x86/acpi_device.o
+    CC         ramstage/arch/x86/acpi_s3.o
+    CC         ramstage/arch/x86/acpigen.o
+    CC         ramstage/arch/x86/acpigen_dsm.o
+    CC         ramstage/arch/x86/boot.o
+    CC         ramstage/arch/x86/c_start.o
+    CC         ramstage/arch/x86/cbmem.o
+    CC         ramstage/arch/x86/cpu.o
+    CC         ramstage/arch/x86/cpu_common.o
+    CC         ramstage/arch/x86/ebda.o
+    CC         ramstage/arch/x86/exception.o
+    CC         ramstage/arch/x86/gdt.o
+    CC         ramstage/arch/x86/ioapic.o
+    CC         ramstage/arch/x86/memcpy.o
+    CC         ramstage/arch/x86/memmove.o
+    CC         ramstage/arch/x86/memset.o
+    CC         ramstage/arch/x86/mmap_boot.o
+    CC         ramstage/arch/x86/mpspec.o
+    CC         ramstage/arch/x86/pci_ops_conf1.o
+    CC         ramstage/arch/x86/pci_ops_mmconf.o
+    CC         ramstage/arch/x86/rdrand.o
+    CC         ramstage/arch/x86/smbios.o
+    CC         ramstage/arch/x86/tables.o
+    CC         ramstage/arch/x86/timestamp.o
+    CC         ramstage/arch/x86/wakeup.o
+    CP         ramstage/arch/x86/memlayout.ld
+    CP         ramstage/lib/program.ld
+    CC         generated/ramstage.o
+    CC         cbfs/fallback/ramstage.debug
+    HOSTCC     cbfstool/rmodtool.o
+    HOSTCC     cbfstool/rmodule.o
+    HOSTCC     cbfstool/common.o
+    HOSTCC     cbfstool/elfheaders.o
+    HOSTCC     cbfstool/xdr.o
+    HOSTCC     cbfstool/rmodtool (link)
+    CREATE     build/mainboard/alienware/m11xr1/cbfs-file.G4KnGf.out (from /home/coreboot/coreboot/.config)
+    OPTION     cmos_layout.bin
+    IASL       build/dsdt.aml
+
+Intel ACPI Component Architecture
+ASL+ Optimizing Compiler version 20161222-64
+Copyright (c) 2000 - 2016 Intel Corporation
+
+coreboot toolchain v1.50 October 15th, 2017
+dsdt.aml    598:  Method(XDSS, 2)
+Remark   2146 -            ^ Method Argument is never used (Arg1)
+
+dsdt.aml   1955: Method(BINF, 2, NotSerialized)
+Remark   2120 -           ^ Control Method should be made Serialized (due to creation of named objects within)
+
+dsdt.aml   2309:   Method (_GTM)
+Remark   2120 -              ^ Control Method should be made Serialized (due to creation of named objects within)
+
+dsdt.aml   2315:    CreateDwordField (PBUF, 0, PIO0)
+Remark   2089 -         Object is not referenced ^  (Name [PIO0] is within a method [_GTM])
+
+dsdt.aml   2316:    CreateDwordField (PBUF, 4, DMA0)
+Remark   2089 -         Object is not referenced ^  (Name [DMA0] is within a method [_GTM])
+
+dsdt.aml   2317:    CreateDwordField (PBUF, 8, PIO1)
+Remark   2089 -         Object is not referenced ^  (Name [PIO1] is within a method [_GTM])
+
+dsdt.aml   2318:    CreateDwordField (PBUF, 12, DMA1)
+Remark   2089 -          Object is not referenced ^  (Name [DMA1] is within a method [_GTM])
+
+dsdt.aml   2319:    CreateDwordField (PBUF, 16, FLAG)
+Remark   2089 -          Object is not referenced ^  (Name [FLAG] is within a method [_GTM])
+
+dsdt.aml   2324:    CreateDwordField (Arg0, 0, PIO0)
+Remark   2089 -         Object is not referenced ^  (Name [PIO0] is within a method [_STM])
+
+dsdt.aml   2325:    CreateDwordField (Arg0, 4, DMA0)
+Remark   2089 -         Object is not referenced ^  (Name [DMA0] is within a method [_STM])
+
+dsdt.aml   2326:    CreateDwordField (Arg0, 8, PIO1)
+Remark   2089 -         Object is not referenced ^  (Name [PIO1] is within a method [_STM])
+
+dsdt.aml   2327:    CreateDwordField (Arg0, 12, DMA1)
+Remark   2089 -          Object is not referenced ^  (Name [DMA1] is within a method [_STM])
+
+dsdt.aml   2328:    CreateDwordField (Arg0, 16, FLAG)
+Remark   2089 -          Object is not referenced ^  (Name [FLAG] is within a method [_STM])
+
+dsdt.aml   2346:   Method (_GTM)
+Remark   2120 -              ^ Control Method should be made Serialized (due to creation of named objects within)
+
+dsdt.aml   2352:    CreateDwordField (PBUF, 0, PIO0)
+Remark   2089 -         Object is not referenced ^  (Name [PIO0] is within a method [_GTM])
+
+dsdt.aml   2353:    CreateDwordField (PBUF, 4, DMA0)
+Remark   2089 -         Object is not referenced ^  (Name [DMA0] is within a method [_GTM])
+
+dsdt.aml   2354:    CreateDwordField (PBUF, 8, PIO1)
+Remark   2089 -         Object is not referenced ^  (Name [PIO1] is within a method [_GTM])
+
+dsdt.aml   2355:    CreateDwordField (PBUF, 12, DMA1)
+Remark   2089 -          Object is not referenced ^  (Name [DMA1] is within a method [_GTM])
+
+dsdt.aml   2356:    CreateDwordField (PBUF, 16, FLAG)
+Remark   2089 -          Object is not referenced ^  (Name [FLAG] is within a method [_GTM])
+
+dsdt.aml   2361:    CreateDwordField (Arg0, 0, PIO0)
+Remark   2089 -         Object is not referenced ^  (Name [PIO0] is within a method [_STM])
+
+dsdt.aml   2362:    CreateDwordField (Arg0, 4, DMA0)
+Remark   2089 -         Object is not referenced ^  (Name [DMA0] is within a method [_STM])
+
+dsdt.aml   2363:    CreateDwordField (Arg0, 8, PIO1)
+Remark   2089 -         Object is not referenced ^  (Name [PIO1] is within a method [_STM])
+
+dsdt.aml   2364:    CreateDwordField (Arg0, 12, DMA1)
+Remark   2089 -          Object is not referenced ^  (Name [DMA1] is within a method [_STM])
+
+dsdt.aml   2365:    CreateDwordField (Arg0, 16, FLAG)
+Remark   2089 -          Object is not referenced ^  (Name [FLAG] is within a method [_STM])
+
+ASL Input:     dsdt.aml - 2426 lines, 44521 bytes, 979 keywords
+AML Output:    dsdt.aml - 12604 bytes, 492 named objects, 487 executable opcodes
+
+Compilation complete. 0 Errors, 0 Warnings, 24 Remarks, 460 Optimizations, 1 Constants Folded
+    IASL       build/dsdt.aml disassembled correctly.
+    GIT        GRUB2 2.02
+Cloning into 'grub2'...
+remote: Counting objects: 92118, done.[K
+remote: Compressing objects:   0% (1/21182)   [Kremote: Compressing objects:   1% (212/21182)   [Kremote: Compressing objects:   2% (424/21182)   [Kremote: Compressing objects:   3% (636/21182)   [Kremote: Compressing objects:   4% (848/21182)   [Kremote: Compressing objects:   5% (1060/21182)   [Kremote: Compressing objects:   6% (1271/21182)   [Kremote: Compressing objects:   7% (1483/21182)   [Kremote: Compressing objects:   8% (1695/21182)   [Kremote: Compressing objects:   9% (1907/21182)   [Kremote: Compressing objects:  10% (2119/21182)   [Kremote: Compressing objects:  11% (2331/21182)   [Kremote: Compressing objects:  12% (2542/21182)   [Kremote: Compressing objects:  13% (2754/21182)   [Kremote: Compressing objects:  14% (2966/21182)   [Kremote: Compressing objects:  15% (3178/21182)   [Kremote: Compressing objects:  16% (3390/21182)   [Kremote: Compressing objects:  17% (3601/21182)   [Kremote: Compressing objects:  18% (3813/21182)   [Kremote: Compressing objects:  19% (4025/21182)   [Kremote: Compressing objects:  20% (4237/21182)   [Kremote: Compressing objects:  21% (4449/21182)   [Kremote: Compressing objects:  22% (4661/21182)   [Kremote: Compressing objects:  23% (4872/21182)   [Kremote: Compressing objects:  24% (5084/21182)   [Kremote: Compressing objects:  25% (5296/21182)   [Kremote: Compressing objects:  26% (5508/21182)   [Kremote: Compressing objects:  27% (5720/21182)   [Kremote: Compressing objects:  28% (5931/21182)   [Kremote: Compressing objects:  29% (6143/21182)   [Kremote: Compressing objects:  30% (6355/21182)   [Kremote: Compressing objects:  31% (6567/21182)   [Kremote: Compressing objects:  32% (6779/21182)   [Kremote: Compressing objects:  33% (6991/21182)   [Kremote: Compressing objects:  34% (7202/21182)   [Kremote: Compressing objects:  35% (7414/21182)   [Kremote: Compressing objects:  36% (7626/21182)   [Kremote: Compressing objects:  37% (7838/21182)   [Kremote: Compressing objects:  38% (8050/21182)   [Kremote: Compressing objects:  39% (8261/21182)   [Kremote: Compressing objects:  40% (8473/21182)   [Kremote: Compressing objects:  41% (8685/21182)   [Kremote: Compressing objects:  42% (8897/21182)   [Kremote: Compressing objects:  43% (9109/21182)   [Kremote: Compressing objects:  44% (9321/21182)   [Kremote: Compressing objects:  45% (9532/21182)   [Kremote: Compressing objects:  46% (9744/21182)   [Kremote: Compressing objects:  47% (9956/21182)   [Kremote: Compressing objects:  48% (10168/21182)   [Kremote: Compressing objects:  49% (10380/21182)   [Kremote: Compressing objects:  50% (10591/21182)   [Kremote: Compressing objects:  51% (10803/21182)   [Kremote: Compressing objects:  52% (11015/21182)   [Kremote: Compressing objects:  53% (11227/21182)   [Kremote: Compressing objects:  54% (11439/21182)   [Kremote: Compressing objects:  55% (11651/21182)   [Kremote: Compressing objects:  56% (11862/21182)   [Kremote: Compressing objects:  57% (12074/21182)   [Kremote: Compressing objects:  58% (12286/21182)   [Kremote: Compressing objects:  59% (12498/21182)   [Kremote: Compressing objects:  60% (12710/21182)   [Kremote: Compressing objects:  61% (12922/21182)   [Kremote: Compressing objects:  62% (13133/21182)   [Kremote: Compressing objects:  63% (13345/21182)   [Kremote: Compressing objects:  64% (13557/21182)   [Kremote: Compressing objects:  65% (13769/21182)   [Kremote: Compressing objects:  66% (13981/21182)   [Kremote: Compressing objects:  67% (14192/21182)   [Kremote: Compressing objects:  68% (14404/21182)   [Kremote: Compressing objects:  69% (14616/21182)   [Kremote: Compressing objects:  70% (14828/21182)   [Kremote: Compressing objects:  71% (15040/21182)   [Kremote: Compressing objects:  72% (15252/21182)   [Kremote: Compressing objects:  73% (15463/21182)   [Kremote: Compressing objects:  74% (15675/21182)   [Kremote: Compressing objects:  75% (15887/21182)   [Kremote: Compressing objects:  76% (16099/21182)   [Kremote: Compressing objects:  77% (16311/21182)   [Kremote: Compressing objects:  78% (16522/21182)   [Kremote: Compressing objects:  79% (16734/21182)   [Kremote: Compressing objects:  80% (16946/21182)   [Kremote: Compressing objects:  81% (17158/21182)   [Kremote: Compressing objects:  82% (17370/21182)   [Kremote: Compressing objects:  83% (17582/21182)   [Kremote: Compressing objects:  84% (17793/21182)   [Kremote: Compressing objects:  85% (18005/21182)   [Kremote: Compressing objects:  86% (18217/21182)   [Kremote: Compressing objects:  87% (18429/21182)   [Kremote: Compressing objects:  88% (18641/21182)   [Kremote: Compressing objects:  89% (18852/21182)   [Kremote: Compressing objects:  90% (19064/21182)   [Kremote: Compressing objects:  91% (19276/21182)   [Kremote: Compressing objects:  92% (19488/21182)   [Kremote: Compressing objects:  93% (19700/21182)   [Kremote: Compressing objects:  94% (19912/21182)   [Kremote: Compressing objects:  95% (20123/21182)   [Kremote: Compressing objects:  96% (20335/21182)   [Kremote: Compressing objects:  97% (20547/21182)   [Kremote: Compressing objects:  98% (20759/21182)   [Kremote: Compressing objects:  99% (20971/21182)   [Kremote: Compressing objects: 100% (21182/21182)   [Kremote: Compressing objects: 100% (21182/21182), done.[K
+Receiving objects:   0% (1/92118)   Receiving objects:   1% (922/92118)   Receiving objects:   2% (1843/92118)   Receiving objects:   3% (2764/92118)   Receiving objects:   4% (3685/92118)   Receiving objects:   5% (4606/92118)   Receiving objects:   6% (5528/92118)   Receiving objects:   7% (6449/92118), 1.31 MiB | 2.22 MiB/s   Receiving objects:   8% (7370/92118), 1.31 MiB | 2.22 MiB/s   Receiving objects:   9% (8291/92118), 1.31 MiB | 2.22 MiB/s   Receiving objects:  10% (9212/92118), 1.31 MiB | 2.22 MiB/s   Receiving objects:  10% (9798/92118), 1.31 MiB | 2.22 MiB/s   Receiving objects:  11% (10133/92118), 1.31 MiB | 2.22 MiB/s   Receiving objects:  12% (11055/92118), 1.31 MiB | 2.22 MiB/s   Receiving objects:  13% (11976/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  14% (12897/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  15% (13818/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  16% (14739/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  17% (15661/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  18% (16582/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  19% (17503/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  20% (18424/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  21% (19345/92118), 2.66 MiB | 2.45 MiB/s   Receiving objects:  22% (20266/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  23% (21188/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  24% (22109/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  25% (23030/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  26% (23951/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  27% (24872/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  28% (25794/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  29% (26715/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  30% (27636/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  31% (28557/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  31% (28957/92118), 4.92 MiB | 3.10 MiB/s   Receiving objects:  32% (29478/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  33% (30399/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  34% (31321/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  35% (32242/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  36% (33163/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  37% (34084/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  38% (35005/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  39% (35927/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  40% (36848/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  41% (37769/92118), 7.80 MiB | 3.74 MiB/s   Receiving objects:  42% (38690/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  43% (39611/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  44% (40532/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  45% (41454/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  46% (42375/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  47% (43296/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  47% (43403/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  48% (44217/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  49% (45138/92118), 10.34 MiB | 3.99 MiB/s   Receiving objects:  50% (46059/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  51% (46981/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  52% (47902/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  53% (48823/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  54% (49744/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  55% (50665/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  56% (51587/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  57% (52508/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  58% (53429/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  59% (54350/92118), 13.61 MiB | 4.41 MiB/s   Receiving objects:  60% (55271/92118), 15.71 MiB | 4.37 MiB/s   Receiving objects:  61% (56192/92118), 15.71 MiB | 4.37 MiB/s   Receiving objects:  61% (56315/92118), 15.71 MiB | 4.37 MiB/s   Receiving objects:  62% (57114/92118), 18.32 MiB | 4.48 MiB/s   Receiving objects:  63% (58035/92118), 18.32 MiB | 4.48 MiB/s   Receiving objects:  64% (58956/92118), 18.32 MiB | 4.48 MiB/s   Receiving objects:  65% (59877/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  66% (60798/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  67% (61720/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  68% (62641/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  69% (63562/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  70% (64483/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  71% (65404/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  72% (66325/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  73% (67247/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  74% (68168/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  75% (69089/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  76% (70010/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  77% (70931/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  78% (71853/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  79% (72774/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  80% (73695/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  81% (74616/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  82% (75537/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  83% (76458/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  83% (76586/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  84% (77380/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  85% (78301/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  86% (79222/92118), 20.38 MiB | 4.43 MiB/s   Receiving objects:  87% (80143/92118), 22.30 MiB | 4.65 MiB/s   Receiving objects:  88% (81064/92118), 22.30 MiB | 4.65 MiB/s   Receiving objects:  89% (81986/92118), 22.30 MiB | 4.65 MiB/s   Receiving objects:  90% (82907/92118), 22.30 MiB | 4.65 MiB/s   Receiving objects:  91% (83828/92118), 24.18 MiB | 4.77 MiB/s   Receiving objects:  92% (84749/92118), 24.18 MiB | 4.77 MiB/s   Receiving objects:  93% (85670/92118), 24.18 MiB | 4.77 MiB/s   Receiving objects:  94% (86591/92118), 24.18 MiB | 4.77 MiB/s   Receiving objects:  94% (87035/92118), 24.18 MiB | 4.77 MiB/s   Receiving objects:  94% (87497/92118), 28.27 MiB | 4.52 MiB/s   Receiving objects:  95% (87513/92118), 28.27 MiB | 4.52 MiB/s   Receiving objects:  95% (87782/92118), 32.73 MiB | 4.22 MiB/s   Receiving objects:  95% (87956/92118), 35.59 MiB | 3.82 MiB/s   Receiving objects:  95% (88347/92118), 39.52 MiB | 3.81 MiB/s   Receiving objects:  96% (88434/92118), 41.64 MiB | 3.86 MiB/s   Receiving objects:  96% (88599/92118), 43.11 MiB | 3.77 MiB/s   Receiving objects:  96% (88857/92118), 46.41 MiB | 3.50 MiB/s   Receiving objects:  96% (89074/92118), 49.34 MiB | 3.33 MiB/s   Receiving objects:  96% (89337/92118), 52.37 MiB | 3.28 MiB/s   Receiving objects:  97% (89355/92118), 52.37 MiB | 3.28 MiB/s   Receiving objects:  97% (89653/92118), 55.43 MiB | 3.04 MiB/s   Receiving objects:  97% (90048/92118), 58.82 MiB | 3.10 MiB/s   Receiving objects:  98% (90276/92118), 60.44 MiB | 3.10 MiB/s   Receiving objects:  98% (90531/92118), 62.04 MiB | 3.11 MiB/s   Receiving objects:  98% (90638/92118), 63.85 MiB | 2.88 MiB/s   Receiving objects:  98% (91138/92118), 64.95 MiB | 2.43 MiB/s   Receiving objects:  99% (91197/92118), 64.95 MiB | 2.43 MiB/s   remote: Total 92118 (delta 68640), reused 92118 (delta 68640)[K
+Receiving objects: 100% (92118/92118), 67.65 MiB | 2.69 MiB/s   Receiving objects: 100% (92118/92118), 69.65 MiB | 3.57 MiB/s, done.
+Resolving deltas:   0% (0/68640)   Resolving deltas:   1% (878/68640)   Resolving deltas:   2% (1399/68640)   Resolving deltas:   3% (2095/68640)   Resolving deltas:   4% (2907/68640)   Resolving deltas:   5% (3546/68640)   Resolving deltas:   6% (4272/68640)   Resolving deltas:   7% (4848/68640)   Resolving deltas:   8% (5504/68640)   Resolving deltas:   9% (6330/68640)   Resolving deltas:  10% (6875/68640)   Resolving deltas:  11% (7561/68640)   Resolving deltas:  12% (8716/68640)   Resolving deltas:  13% (9020/68640)   Resolving deltas:  14% (9629/68640)   Resolving deltas:  15% (10298/68640)   Resolving deltas:  16% (10984/68640)   Resolving deltas:  17% (11862/68640)   Resolving deltas:  18% (12529/68640)   Resolving deltas:  19% (13042/68640)   Resolving deltas:  20% (14097/68640)   Resolving deltas:  21% (14443/68640)   Resolving deltas:  22% (15210/68640)   Resolving deltas:  23% (15792/68640)   Resolving deltas:  24% (16475/68640)   Resolving deltas:  25% (17181/68640)   Resolving deltas:  26% (17857/68640)   Resolving deltas:  26% (18013/68640)   Resolving deltas:  27% (18618/68640)   Resolving deltas:  28% (19322/68640)   Resolving deltas:  29% (19929/68640)   Resolving deltas:  30% (20910/68640)   Resolving deltas:  31% (21490/68640)   Resolving deltas:  32% (22309/68640)   Resolving deltas:  33% (22938/68640)   Resolving deltas:  34% (23338/68640)   Resolving deltas:  35% (24039/68640)   Resolving deltas:  36% (25023/68640)   Resolving deltas:  37% (25397/68640)   Resolving deltas:  38% (26115/68640)   Resolving deltas:  39% (26779/68640)   Resolving deltas:  40% (27482/68640)   Resolving deltas:  41% (28161/68640)   Resolving deltas:  42% (28868/68640)   Resolving deltas:  43% (29517/68640)   Resolving deltas:  44% (30233/68640)   Resolving deltas:  45% (30888/68640)   Resolving deltas:  46% (31622/68640)   Resolving deltas:  47% (32276/68640)   Resolving deltas:  48% (32961/68640)   Resolving deltas:  49% (33639/68640)   Resolving deltas:  50% (34381/68640)   Resolving deltas:  51% (35010/68640)   Resolving deltas:  51% (35052/68640)   Resolving deltas:  52% (35756/68640)   Resolving deltas:  53% (36396/68640)   Resolving deltas:  54% (37103/68640)   Resolving deltas:  55% (37769/68640)   Resolving deltas:  56% (38458/68640)   Resolving deltas:  57% (39133/68640)   Resolving deltas:  58% (39826/68640)   Resolving deltas:  59% (40505/68640)   Resolving deltas:  60% (41195/68640)   Resolving deltas:  61% (41900/68640)   Resolving deltas:  62% (42577/68640)   Resolving deltas:  62% (42611/68640)   Resolving deltas:  63% (43268/68640)   Resolving deltas:  64% (43932/68640)   Resolving deltas:  65% (44616/68640)   Resolving deltas:  66% (45307/68640)   Resolving deltas:  67% (46008/68640)   Resolving deltas:  68% (46750/68640)   Resolving deltas:  69% (47384/68640)   Resolving deltas:  70% (48087/68640)   Resolving deltas:  71% (48740/68640)   Resolving deltas:  72% (49429/68640)   Resolving deltas:  73% (50108/68640)   Resolving deltas:  74% (50795/68640)   Resolving deltas:  74% (51423/68640)   Resolving deltas:  75% (51484/68640)   Resolving deltas:  76% (52194/68640)   Resolving deltas:  77% (52911/68640)   Resolving deltas:  77% (53473/68640)   Resolving deltas:  78% (53582/68640)   Resolving deltas:  79% (54228/68640)   Resolving deltas:  80% (54924/68640)   Resolving deltas:  80% (55322/68640)   Resolving deltas:  81% (55606/68640)   Resolving deltas:  82% (56292/68640)   Resolving deltas:  82% (56672/68640)   Resolving deltas:  83% (56974/68640)   Resolving deltas:  84% (57765/68640)   Resolving deltas:  85% (58583/68640)   Resolving deltas:  86% (59041/68640)   Resolving deltas:  87% (59724/68640)   Resolving deltas:  87% (60244/68640)   Resolving deltas:  88% (60479/68640)   Resolving deltas:  88% (60642/68640)   Resolving deltas:  89% (61091/68640)   Resolving deltas:  89% (61352/68640)   Resolving deltas:  90% (61776/68640)   Resolving deltas:  90% (61778/68640)   Resolving deltas:  90% (62356/68640)   Resolving deltas:  91% (62463/68640)   Resolving deltas: 100% (68640/68640)   Resolving deltas: 100% (68640/68640), done.
+Already on 'master'
+Your branch is up to date with 'origin/master'.
+Already up to date.
+warning: refname '2.02' is ambiguous.
+Switched to branch '2.02'
+    CONFIG     GRUB2 2.02
+Importing unicode...
+./autogen.sh: line 15: python: command not found
+Makefile:28: recipe for target 'grub2/build/config.h' failed
+make[1]: *** [grub2/build/config.h] Error 127
+payloads/external/Makefile.inc:160: recipe for target 'grub2' failed
+make: *** [grub2] Error 2
+Makefile:20: recipe for target 'compile' failed

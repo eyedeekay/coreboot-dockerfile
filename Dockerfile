@@ -1,6 +1,6 @@
 FROM debian:sid
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y git make build-essential gnat flex bison libncurses5-dev wget zlib1g-dev python3 python
+RUN apt-get install -y git make build-essential gnat flex bison libncurses5-dev wget zlib1g-dev python3 python autoconf
 RUN adduser --home /home/coreboot/ --shell /bin/bash --gecos 'coreboot,,,,' --disabled-password coreboot
 USER coreboot
 RUN git clone https://review.coreboot.org/coreboot /home/coreboot/coreboot

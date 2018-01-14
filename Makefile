@@ -74,6 +74,40 @@ copy:
 copy-utils:
 	docker cp coreboot-build:/home/coreboot/coreboot/util .
 
+pciinfo:
+	sudo lspci -nnvvvxxxx | tee lspci.log
+
+usbinfo:
+	sudo lsusb -vvv | tee lsusb.log
+
+superioinfo:
+	sudo superiotool -deV | tee superiotool.log
+
+intelinfo:
+	sudo inteltool -a | tee inteltool.log
+
 ecinfo:
 	sudo ./util/ectool/ectool -i | tee ectool.log
 
+msrinfo:
+	sudo msrtool | tee msrtool.log
+
+dmiinfo:
+	sudo dmidecode | tee dmidecode.log
+
+biosinfo:
+	sudo biosdecode | tee biosdecode.log
+
+nvraminfo:
+	sudo nvramtool -x | tee nvramtool.log
+
+acpiinfo:
+	sudo acpidump | tee acpidump.log
+
+info: pciinfo usbinfo superioinfo intelinfo ecinfo msrinfo dmiinfo biosinfo nvraminfo acpiinfo
+
+#for x in /sys/class/sound/card0/hw*; do cat "$x/init_pin_configs" > pin_"$(basename "$x")"; done
+#for x in /proc/asound/card0/codec#*; do cat "$x" > "$(basename "$x")"; done
+#cat /proc/cpuinfo > cpuinfo.log 2> cpuinfo.err.log
+#cat /proc/ioports > ioports.log 2> ioports.err.log
+#cat /sys/class/input/input*/id/bustype > input_bustypes.log

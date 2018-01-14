@@ -60,3 +60,20 @@ nconfig:
 child:
 	docker build -f Dockerfile.tlhab -t "eyedeekay/tlhab" .
 
+kconflist:
+	docker rm -f coreboot-kconfig-readout; \
+	docker run -i --name coreboot-kconfig-readout -t eyedeekay/tlhab "find /home/coreboot/coreboot -iname Kconfig -exec grep -i -H -A 3 -B 3 select '{}' \; -exec echo \; | less"
+
+kconfopts:
+	docker rm -f coreboot-kconfig-readout; \
+	docker run -i --name coreboot-kconfig-readout -t eyedeekay/tlhab "find /home/coreboot/coreboot -iname Kconfig -exec grep -i -H -A 3 -B 3 select '{}' \; -exec echo \;" | tee -a Kconfig_options
+
+copy:
+	docker cp coreboot-build:/home/coreboot/coreboot/build .
+
+copy-utils:
+	docker cp coreboot-build:/home/coreboot/coreboot/util .
+
+ecinfo:
+	sudo ./util/ectool/ectool -i | tee ectool.log
+

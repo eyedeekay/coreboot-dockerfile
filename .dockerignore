@@ -1,0 +1,6 @@
+build
+util
+docs
+*log
+*err
+Kconfig_options

@@ -11488,7 +11488,7 @@ grep: /home/coreboot/coreboot/util/kconfig: Is a directory
 /home/coreboot/coreboot/payloads/external/tianocore/Kconfig-config TIANOCORE_STABLE
 /home/coreboot/coreboot/payloads/external/tianocore/Kconfig-	bool "stable"
 /home/coreboot/coreboot/payloads/external/tianocore/Kconfig-	help
-/home/coreboot/coreboot/payloads/external/tianocore/Kconfig:	  Select this option to build the stable tianocore version 
+/home/coreboot/coreboot/payloads/external/tianocore/Kconfig:	  Select this option to build the stable tianocore version
 /home/coreboot/coreboot/payloads/external/tianocore/Kconfig-	  i.e. a version of Tianocore that builds without any errors
 /home/coreboot/coreboot/payloads/external/tianocore/Kconfig-
 /home/coreboot/coreboot/payloads/external/tianocore/Kconfig-config TIANOCORE_MASTER

@@ -2,6 +2,8 @@ export PWD = $(shell pwd)
 
 #source config.mk
 
+device = m11xr1
+
 readout:
 	docker run -i --rm -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-readout \
@@ -47,7 +49,7 @@ menuconfig:
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
 
-rebuild:
+confbuild:
 	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make menuconfig && make'
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
@@ -76,39 +78,47 @@ copy-utils:
 	docker cp coreboot-build:/home/coreboot/coreboot/util .
 
 pciinfo:
-	sudo lspci -nnvvvxxxx | tee lspci.log
+	sudo lspci -nnvvvxxx | tee vendor/docs/hwdumps/$(device)/lspci.log 2> vendor/docs/hwdumps/$(device)/lspci.err
+
+hwinfo:
+	sudo lshw | tee vendor/docs/hwdumps/$(device)/lshw.log 2> vendor/docs/hwdumps/$(device)/lshw.err
 
 usbinfo:
-	sudo lsusb -vvv | tee lsusb.log
+	sudo lsusb -vvv | tee vendor/docs/hwdumps/$(device)/lsusb.log 2> vendor/docs/hwdumps/$(device)/lsusb.err
 
 superioinfo:
-	sudo superiotool -deV | tee superiotool.log
+	sudo superiotool -deV | tee vendor/docs/hwdumps/$(device)/superiotool.log 2> vendor/docs/hwdumps/$(device)/superiotool.err
 
 intelinfo:
-	sudo inteltool -a | tee inteltool.log
+	sudo inteltool -a | tee vendor/docs/hwdumps/$(device)/inteltool.log 2> vendor/docs/hwdumps/$(device)/inteltool.err
 
 ecinfo:
-	sudo ./util/ectool/ectool -i | tee ectool.log
+	sudo ./util/ectool/ectool -i | tee vendor/docs/hwdumps/$(device)/ectool.log 2> vendor/docs/hwdumps/$(device)/ectool.err
 
 msrinfo:
-	sudo msrtool | tee msrtool.log
+	sudo msrtool | tee vendor/docs/hwdumps/$(device)/msrtool.log 2> vendor/docs/hwdumps/$(device)/msrtool.err
 
 dmiinfo:
-	sudo dmidecode | tee dmidecode.log
+	sudo dmidecode | tee vendor/docs/hwdumps/$(device)/dmidecode.log 2> vendor/docs/hwdumps/$(device)/dmidecode.err
 
 biosinfo:
-	sudo biosdecode | tee biosdecode.log
+	sudo biosdecode | tee vendor/docs/hwdumps/$(device)/biosdecode.log 2> vendor/docs/hwdumps/$(device)/biosdecode.err
 
 nvraminfo:
-	sudo nvramtool -x | tee nvramtool.log
+	sudo nvramtool -x | tee vendor/docs/hwdumps/$(device)/nvramtool.log 2> vendor/docs/hwdumps/$(device)/nvramtool.err
 
 acpiinfo:
-	sudo acpidump | tee acpidump.log
+	sudo acpidump | tee vendor/docs/hwdumps/$(device)/acpidump.log 2> vendor/docs/hwdumps/$(device)/acpisump.err
 
-info: pciinfo usbinfo superioinfo intelinfo ecinfo msrinfo dmiinfo biosinfo nvraminfo acpiinfo
+infolder:
+	rm -rf vendor/docs/hwdumps/$(device)/ && mkdir -p vendor/docs/hwdumps/$(device)/
+
+info: infolder pciinfo hwinfo usbinfo superioinfo intelinfo ecinfo msrinfo dmiinfo biosinfo nvraminfo acpiinfo
 
 #for x in /sys/class/sound/card0/hw*; do cat "$x/init_pin_configs" > pin_"$(basename "$x")"; done
 #for x in /proc/asound/card0/codec#*; do cat "$x" > "$(basename "$x")"; done
 #cat /proc/cpuinfo > cpuinfo.log 2> cpuinfo.err.log
 #cat /proc/ioports > ioports.log 2> ioports.err.log
 #cat /sys/class/input/input*/id/bustype > input_bustypes.log
+
+rebuild: child compile copy

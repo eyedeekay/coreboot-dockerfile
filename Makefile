@@ -22,7 +22,7 @@ compile:
 	docker rm -f coreboot-build; \
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-build \
-		-t "eyedeekay/tlhab" 'make'
+		-t "eyedeekay/tlhab" 'make' | tee build.log 2> build.err
 
 build:
 	docker build -f Dockerfile -t "eyedeekay/coreboot-dockerfile" .
@@ -81,7 +81,7 @@ pciinfo:
 	sudo lspci -nnvvvxxx | tee vendor/docs/hwdumps/$(device)/lspci.log 2> vendor/docs/hwdumps/$(device)/lspci.err
 
 hwinfo:
-	sudo lshw | tee vendor/docs/hwdumps/$(device)/lshw.log 2> vendor/docs/hwdumps/$(device)/lshw.err
+	sudo lshw | grep -v serial | grep -v uuid | tee vendor/docs/hwdumps/$(device)/lshw.log 2> vendor/docs/hwdumps/$(device)/lshw.err
 
 usbinfo:
 	sudo lsusb -vvv | tee vendor/docs/hwdumps/$(device)/lsusb.log 2> vendor/docs/hwdumps/$(device)/lsusb.err
@@ -109,16 +109,26 @@ nvraminfo:
 
 acpiinfo:
 	sudo acpidump | tee vendor/docs/hwdumps/$(device)/acpidump.log 2> vendor/docs/hwdumps/$(device)/acpisump.err
+	cd vendor/docs/hwdumps/$(device)/ && acpixtract -a acpidump.log
 
 infolder:
-	rm -rf vendor/docs/hwdumps/$(device)/ && mkdir -p vendor/docs/hwdumps/$(device)/
+	mkdir -p vendor/docs/hwdumps/$(device)/
 
-info: infolder pciinfo hwinfo usbinfo superioinfo intelinfo ecinfo msrinfo dmiinfo biosinfo nvraminfo acpiinfo
+cpuinfo:
+	cat /proc/cpuinfo | tee vendor/docs/hwdumps/$(device)/cpuinfo.log 2> vendor/docs/hwdumps/$(device)/cpuinfo.err
+
+ioinfo:
+	cat /proc/ioports | tee vendor/docs/hwdumps/$(device)/ioports.log 2> vendor/docs/hwdumps/$(device)/ioports.err
+
+info: infolder cpuinfo ioinfo pciinfo hwinfo usbinfo superioinfo intelinfo ecinfo msrinfo dmiinfo biosinfo nvraminfo acpiinfo
+
+hwdiff:
+	diff -y --width=200 $(shell find . -name lspci.log.trim) | tee vendor/docs/board-differences-overview.diff
 
 #for x in /sys/class/sound/card0/hw*; do cat "$x/init_pin_configs" > pin_"$(basename "$x")"; done
 #for x in /proc/asound/card0/codec#*; do cat "$x" > "$(basename "$x")"; done
-#cat /proc/cpuinfo > cpuinfo.log 2> cpuinfo.err.log
-#cat /proc/ioports > ioports.log 2> ioports.err.log
-#cat /sys/class/input/input*/id/bustype > input_bustypes.log
+
+#	cat /sys/class/input/input*/id/bustype | tee input_bustypes.log
 
 rebuild: child compile copy
+

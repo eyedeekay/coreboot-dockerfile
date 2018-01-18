@@ -5,6 +5,7 @@ RUN apt-get install -y python3 python autoconf libfreetype6-dev unifont
 USER coreboot
 COPY vendor/alienware /home/coreboot/coreboot/src/mainboard/alienware
 COPY vendor/dell /home/coreboot/coreboot/src/mainboard/dell
+COPY vendor/acer /home/coreboot/coreboot/src/mainboard/acer
 COPY .config /home/coreboot/coreboot
 RUN make build/config.h
 ENTRYPOINT [ "bash", "-i", "-c" ]

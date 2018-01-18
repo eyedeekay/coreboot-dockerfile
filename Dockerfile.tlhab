@@ -4,6 +4,7 @@ USER root
 RUN apt-get install -y python3 python autoconf libfreetype6-dev unifont
 USER coreboot
 COPY vendor/alienware /home/coreboot/coreboot/src/mainboard/alienware
+COPY vendor/dell/i1545 /home/coreboot/coreboot/src/mainboard/dell/i1545
 COPY .config /home/coreboot/coreboot
 RUN make build/config.h
 ENTRYPOINT [ "bash", "-i", "-c" ]

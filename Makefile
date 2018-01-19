@@ -111,7 +111,7 @@ acpiinfo:
 	sudo acpidump | tee vendor/docs/hwdumps/$(device)/acpidump.log 2> vendor/docs/hwdumps/$(device)/acpisump.err
 	cd vendor/docs/hwdumps/$(device)/ && acpixtract -a acpidump.log
 
-infolder:
+nfolder:
 	mkdir -p vendor/docs/hwdumps/$(device)/
 
 cpuinfo:
@@ -131,4 +131,20 @@ hwdiff:
 #	cat /sys/class/input/input*/id/bustype | tee input_bustypes.log
 
 rebuild: child compile copy
+
+prebuilts:
+	cd util/ectool; make; cp ectool ../../prebuilt/
+	cd util/msrtool; ./configure; make; cp msrtool ../../prebuilt
+	cd util/nvramtool; make; cp nvramtool ../../prebuilt
+	cd util/superiotool; make; cp superiotool ../../prebuilt
+	cd util/inteltool; make; cp inteltool ../../prebuilt
+
+run-prebuilts:
+	./prebuilt/ectool -i | tee vendor/docs/hwdumps/$(device)/ectool.log 2> vendor/docs/hwdumps/$(device)/ectool.err
+	./prebuilt/msrtool | tee vendor/docs/hwdumps/$(device)/msrtool.log 2> vendor/docs/hwdumps/$(device)/msrtool.err
+	./prebuilt/nvramtool -x | tee vendor/docs/hwdumps/$(device)/nvramtool.log 2> vendor/docs/hwdumps/$(device)/nvramtool.err
+	./prebuilt/superiotool -deV | tee vendor/docs/hwdumps/$(device)/superiotool.log 2> vendor/docs/hwdumps/$(device)/superiotool.err
+	./prebuilt/inteltool -a | tee vendor/docs/hwdumps/$(device)/inteltool.log 2> vendor/docs/hwdumps/$(device)/inteltool.err
+	./prebuilt/lspci -nnvvvxxx | tee vendor/docs/hwdumps/$(device)/lspci.log 2> vendor/docs/hwdumps/$(device)/lspci.err
+	./prebuilt/dmidecode | tee vendor/docs/hwdumps/$(device)/dmidecode.log 2> vendor/docs/hwdumps/$(device)/dmidecode.err
 

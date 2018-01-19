@@ -111,7 +111,7 @@ acpiinfo:
 	sudo acpidump | tee vendor/docs/hwdumps/$(device)/acpidump.log 2> vendor/docs/hwdumps/$(device)/acpisump.err
 	cd vendor/docs/hwdumps/$(device)/ && acpixtract -a acpidump.log
 
-nfolder:
+infolder:
 	mkdir -p vendor/docs/hwdumps/$(device)/
 
 cpuinfo:

@@ -81,7 +81,7 @@ pciinfo:
 	sudo lspci -nnvvvxxx | tee vendor/docs/hwdumps/$(device)/lspci.log 2> vendor/docs/hwdumps/$(device)/lspci.err
 
 hwinfo:
-	sudo lshw | grep -v serial | grep -v uuid | tee vendor/docs/hwdumps/$(device)/lshw.log 2> vendor/docs/hwdumps/$(device)/lshw.err
+	sudo lshw -sanitize | tee vendor/docs/hwdumps/$(device)/lshw.log 2> vendor/docs/hwdumps/$(device)/lshw.err
 
 usbinfo:
 	sudo lsusb -vvv | tee vendor/docs/hwdumps/$(device)/lsusb.log 2> vendor/docs/hwdumps/$(device)/lsusb.err

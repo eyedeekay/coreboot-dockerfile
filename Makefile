@@ -2,7 +2,7 @@ export PWD = $(shell pwd)
 
 #source config.mk
 
-device = m11xr1
+device ?= i1545
 
 readout:
 	docker run -i --rm -v $(PWD)/.config:/home/coreboot/coreboot/.config \

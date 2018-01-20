@@ -166,3 +166,15 @@ run-prebuilts:
 
 reduce:
 	dd if=build/coreboot.rom bs=1M of=build/top.rom skip=6
+
+ifdtool:
+	docker rm -f coreboot-util-ifdtool; \
+	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
+		--name coreboot-util-ifdtool -t "eyedeekay/tlhab" 'cd util/ifdtool && make'
+	docker cp coreboot-util-ifdtool:/home/coreboot/coreboot/util/ifdtool/ifdtool ./prebuilt/ifdtool
+
+othertool:
+	docker rm -f coreboot-util-; \
+	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
+		--name coreboot-util- -t "eyedeekay/tlhab" bash
+

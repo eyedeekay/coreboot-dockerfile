@@ -2,7 +2,8 @@ export PWD = $(shell pwd)
 
 #source config.mk
 
-device ?= i1545
+#device ?= i1545
+device ?= m11xr1
 
 readout:
 	docker run -i --rm -v $(PWD)/.config:/home/coreboot/coreboot/.config \
@@ -123,7 +124,7 @@ ioinfo:
 info: infolder cpuinfo ioinfo pciinfo hwinfo usbinfo superioinfo intelinfo ecinfo msrinfo dmiinfo biosinfo nvraminfo acpiinfo
 
 hwdiff:
-	diff -y --width=200 $(shell find . -name lspci.log.trim) | tee vendor/docs/board-differences-overview.diff
+	diff -y --expand-tabs --tabsize=8 --width=240 vendor/docs/libreboot_hwdumps/x200/lspci.log.trim vendor/docs/hwdumps/$(device)/lspci.log.trim | tee vendor/docs/differences-overview-x200-$(device).diff
 
 #for x in /sys/class/sound/card0/hw*; do cat "$x/init_pin_configs" > pin_"$(basename "$x")"; done
 #for x in /proc/asound/card0/codec#*; do cat "$x" > "$(basename "$x")"; done

@@ -126,6 +126,9 @@ info: infolder cpuinfo ioinfo pciinfo hwinfo usbinfo superioinfo intelinfo ecinf
 hwdiff:
 	diff -y --expand-tabs --tabsize=8 --width=240 vendor/docs/libreboot_hwdumps/x200/lspci.log.trim vendor/docs/hwdumps/$(device)/lspci.log.trim | tee vendor/docs/differences-overview-x200-$(device).diff
 
+diff:
+	diff -y --color=always --expand-tabs --tabsize=8 --width=240 vendor/docs/libreboot_hwdumps/x200/lspci.log.trim vendor/docs/hwdumps/$(device)/lspci.log.trim | less -R
+
 #for x in /sys/class/sound/card0/hw*; do cat "$x/init_pin_configs" > pin_"$(basename "$x")"; done
 #for x in /proc/asound/card0/codec#*; do cat "$x" > "$(basename "$x")"; done
 

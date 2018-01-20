@@ -159,3 +159,5 @@ run-prebuilts:
 	./prebuilt/lspci -nnvvvxxx | tee vendor/docs/hwdumps/$(device)/lspci.log 2> vendor/docs/hwdumps/$(device)/lspci.err
 	./prebuilt/dmidecode | tee vendor/docs/hwdumps/$(device)/dmidecode.log 2> vendor/docs/hwdumps/$(device)/dmidecode.err
 
+reduce:
+	dd if=build/coreboot.rom bs=1M of=build/top.rom skip=6

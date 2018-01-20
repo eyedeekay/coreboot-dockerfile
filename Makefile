@@ -4,6 +4,7 @@ export PWD = $(shell pwd)
 
 #device ?= i1545
 device ?= m11xr1
+search = ENE932
 
 readout:
 	docker run -i --rm -v $(PWD)/.config:/home/coreboot/coreboot/.config \
@@ -129,10 +130,16 @@ hwdiff:
 diff:
 	diff -y --color=always --expand-tabs --tabsize=8 --width=240 vendor/docs/libreboot_hwdumps/x200/lspci.log.trim vendor/docs/hwdumps/$(device)/lspci.log.trim | less -R
 
+find:
+	grep $(search) $(shell find . -name Kconfig)
+
 #for x in /sys/class/sound/card0/hw*; do cat "$x/init_pin_configs" > pin_"$(basename "$x")"; done
 #for x in /proc/asound/card0/codec#*; do cat "$x" > "$(basename "$x")"; done
 
 #	cat /sys/class/input/input*/id/bustype | tee input_bustypes.log
+
+dfind:
+	docker run --rm -t eyedeekay/tlhab "grep $(search) \$$(find . -name Kconfig)"
 
 rebuild: child compile copy
 

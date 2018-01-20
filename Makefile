@@ -46,11 +46,14 @@ run:
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot -t "eyedeekay/tlhab" bash
 
+archiveconfig:
+	cp .config config-$(device)
+
 menuconfig:
 	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make menuconfig'
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
-	cp .config config-$(device)
+	make archiveconfig
 
 confbuild:
 	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make menuconfig && make'
@@ -61,7 +64,7 @@ nconfig:
 	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make nconfig'
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
-	cp .config config-$(device)
+	make archiveconfig
 
 child:
 	docker build -f Dockerfile.tlhab -t "eyedeekay/tlhab" .

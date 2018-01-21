@@ -4,3 +4,6 @@ docs
 *log
 *err
 Kconfig_options
+.git
+vendor/.git
+vendor/docs

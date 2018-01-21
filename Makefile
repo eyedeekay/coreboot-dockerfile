@@ -4,7 +4,9 @@ export PWD = $(shell pwd)
 
 #device ?= i1545
 device ?= m11xr1
-search = ENE932
+search = NUVOTON
+
+make: $(device)
 
 readout:
 	docker run -i --rm -v $(PWD)/.config:/home/coreboot/coreboot/.config \
@@ -19,27 +21,29 @@ debug:
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-build \
 		-t "eyedeekay/tlhab" 'make --debug=v' | tee build.log 2> build.err
+	make logtail
 
 compile:
 	docker rm -f coreboot-build; \
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-build \
 		-t "eyedeekay/tlhab" 'make' | tee build.log 2> build.err
+	make logtail
 
 build:
-	docker build -f Dockerfile -t "eyedeekay/coreboot-dockerfile" .
+	docker build --force-rm -f Dockerfile -t "eyedeekay/coreboot-dockerfile" .
 
 better-build:
-	docker build -f Dockerfiles/Dockerfile.deps -t "eyedeekay/coreboot-dockerfile:deps" .
-	docker build -f Dockerfiles/Dockerfile.i386 -t "eyedeekay/coreboot-dockerfile:i386" .
-	docker build -f Dockerfiles/Dockerfile.x64 -t "eyedeekay/coreboot-dockerfile:x64" .
-	docker build -f Dockerfiles/Dockerfile.arm -t "eyedeekay/coreboot-dockerfile:arm" .
-	docker build -f Dockerfiles/Dockerfile.aarch64 -t "eyedeekay/coreboot-dockerfile:aarch64" .
-	docker build -f Dockerfiles/Dockerfile.mips -t "eyedeekay/coreboot-dockerfile:mips" .
-	docker build -f Dockerfiles/Dockerfile.riscv -t "eyedeekay/coreboot-dockerfile:riscv" .
-	docker build -f Dockerfiles/Dockerfile.power8 -t "eyedeekay/coreboot-dockerfile:power8" .
-	docker build -f Dockerfiles/Dockerfile.nds32le -t "eyedeekay/coreboot-dockerfile:nds32le" .
-	docker build -f Dockerfiles/Dockerfile -t "eyedeekay/coreboot-dockerfile" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.deps -t "eyedeekay/coreboot-dockerfile:deps" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.i386 -t "eyedeekay/coreboot-dockerfile:i386" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.x64 -t "eyedeekay/coreboot-dockerfile:x64" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.arm -t "eyedeekay/coreboot-dockerfile:arm" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.aarch64 -t "eyedeekay/coreboot-dockerfile:aarch64" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.mips -t "eyedeekay/coreboot-dockerfile:mips" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.riscv -t "eyedeekay/coreboot-dockerfile:riscv" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.power8 -t "eyedeekay/coreboot-dockerfile:power8" .
+	docker build --force-rm -f Dockerfiles/Dockerfile.nds32le -t "eyedeekay/coreboot-dockerfile:nds32le" .
+	docker build --force-rm -f Dockerfiles/Dockerfile -t "eyedeekay/coreboot-dockerfile" .
 
 run:
 	docker rm -f coreboot; \
@@ -67,7 +71,7 @@ nconfig:
 	make archiveconfig
 
 child:
-	docker build -f Dockerfile.tlhab -t "eyedeekay/tlhab" .
+	docker build --force-rm -f Dockerfile.tlhab -t "eyedeekay/tlhab" .
 
 kconflist:
 	docker rm -f coreboot-kconfig-readout; \
@@ -138,10 +142,16 @@ diff:
 find:
 	grep $(search) $(shell find . -name Kconfig)
 
-#for x in /sys/class/sound/card0/hw*; do cat "$x/init_pin_configs" > pin_"$(basename "$x")"; done
+#scinfo:
+#	for x in $(/sys/class/sound/card0/hw*); do cat "$x/init_pin_configs" | tee vendor/docs/hwdumps/$(device)/pin_"$(basename "$x")"; done
+
 #for x in /proc/asound/card0/codec#*; do cat "$x" > "$(basename "$x")"; done
 
-#	cat /sys/class/input/input*/id/bustype | tee input_bustypes.log
+#tee soundcard.log 2> vendor/docs/hwdumps/$(device)/soundcard.err
+
+businfo:
+	cat /sys/class/input/input*/id/bustype | tee vendor/docs/hwdumps/$(device)/input_bustypes.log 2> vendor/docs/hwdumps/$(device)/input_bustypes.err
+
 
 dfind:
 	docker run --rm -t eyedeekay/tlhab "grep $(search) \$$(find . -name Kconfig)"
@@ -178,3 +188,13 @@ othertool:
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-util- -t "eyedeekay/tlhab" bash
 
+logtail:
+	tail -n 20 build.log | tee vendor/docs/hwdumps/$(device)/build.result
+
+m11xr1:
+	cp config-m11xr1 .config
+	make rebuild
+
+i1545:
+	cp config-i1545 .config
+	make rebuild

@@ -2,8 +2,8 @@ export PWD = $(shell pwd)
 
 #source config.mk
 
-device ?= i1545
-#device ?= m11xr1
+#device ?= i1545
+device ?= m11xr1
 search = NUVOTON
 
 make: $(device)
@@ -15,7 +15,7 @@ readout:
 
 clobber:
 	docker rm -f coreboot-build; \
-	docker rmi -f eyedeekay/tlhab
+	docker rmi -f eyedeekay/tlhab; true
 
 clean:
 	rm *log *err

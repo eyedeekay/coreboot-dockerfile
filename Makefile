@@ -198,16 +198,12 @@ othertool:
 logtail:
 	tail -n 20 build.log | tee vendor/docs/hwdumps/$(device)/build.result
 
-m11xr1:
-	cp config-m11xr1 .config
-	make rebuild
+m11xr1: target-m11xr1
 
-i1545:
-	cp config-i1545 .config
-	make rebuild
+i1545: target-i1545
 
 target-m11xr1:
-	docker build --force-rm -f Dockerfiles.targets/Dockerfile.m11xr1 .
+	docker build --force-rm -f Dockerfiles.targets/Dockerfile.m11xr1 eyedeekay/coreboot-m11xr1 .
 
 target-i1545:
-	docker build --force-rm -f Dockerfiles.targets/Dockerfile.i1545 .
+	docker build --force-rm -f Dockerfiles.targets/Dockerfile.i1545 -t eyedeekay/coreboot-i1545 .

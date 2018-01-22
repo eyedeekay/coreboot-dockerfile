@@ -2,8 +2,8 @@ export PWD = $(shell pwd)
 
 #source config.mk
 
-#device ?= i1545
-device ?= m11xr1
+device ?= i1545
+#device ?= m11xr1
 search = WINBOND
 
 make: $(device)
@@ -49,41 +49,45 @@ better-build:
 	docker build --force-rm -f Dockerfiles/Dockerfile.nds32le -t "eyedeekay/coreboot-dockerfile:nds32le" .
 	docker build --force-rm -f Dockerfiles/Dockerfile -t "eyedeekay/coreboot-dockerfile" .
 
-run:
+run: assureconfig
 	docker rm -f coreboot; \
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot -t "eyedeekay/tlhab" bash
 
+assureconfig:
+	cp config-$(device) .config
+
 archiveconfig:
 	cp .config config-$(device)
 
-menuconfig:
-	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make menuconfig'
+menuconfig: assureconfig
+	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make distclean; make menuconfig'
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
 	make archiveconfig
 
-confbuild:
-	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make menuconfig && make'
-	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
-	docker rm -f coreboot-config
-
-nconfig:
-	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make nconfig'
+confbuild: assureconfig
+	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make distclean; make menuconfig && make'
 	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
 	docker rm -f coreboot-config
 	make archiveconfig
 
-child:
+nconfig: assureconfig
+	docker run -i --name coreboot-config -t "eyedeekay/tlhab" 'make distclean; make nconfig'
+	docker cp coreboot-config:/home/coreboot/coreboot/.config .; \
+	docker rm -f coreboot-config
+	make archiveconfig
+
+child: assureconfig
 	docker build --force-rm -f Dockerfile.tlhab -t "eyedeekay/tlhab" .
 
 kconflist:
 	docker rm -f coreboot-kconfig-readout; \
-	docker run -i --name coreboot-kconfig-readout -t eyedeekay/tlhab "find /home/coreboot/coreboot -iname Kconfig -exec grep -i -H -A 3 -B 3 select '{}' \; -exec echo \; | less"
+	docker run -i --name coreboot-kconfig-readout -t eyedeekay/tlhab "find /home/coreboot/coreboot -iname Kconfig -exec grep -i -H -A 3 -B 3 select '{}' \; -exec echo \; | sed 's|.*:||g' | sed 's|.*-||g' | less"
 
 kconfopts:
 	docker rm -f coreboot-kconfig-readout; \
-	docker run -i --name coreboot-kconfig-readout -t eyedeekay/tlhab "find /home/coreboot/coreboot -iname Kconfig -exec grep -i -H -A 3 -B 3 select '{}' \; -exec echo \;" | tee -a Kconfig_options
+	docker run -i --name coreboot-kconfig-readout -t eyedeekay/tlhab "find /home/coreboot/coreboot -iname Kconfig -exec grep -i -H -A 3 -B 3 select '{}' \; -exec echo \;" | sed 's|.*:||g' | sed 's|.*-||g' | tee Kconfig_options
 
 copy:
 	rm -rf build

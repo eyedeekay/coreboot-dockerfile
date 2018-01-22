@@ -4,7 +4,7 @@ export PWD = $(shell pwd)
 
 device ?= i1545
 #device ?= m11xr1
-search = WINBOND
+search = NUVOTON
 
 make: $(device)
 
@@ -20,14 +20,14 @@ clobber:
 clean:
 	rm *log *err
 
-debug:
+debug: assureconfig
 	docker rm -f coreboot-build; \
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-build \
 		-t "eyedeekay/tlhab" 'make --debug=v' | tee build.log 2> build.err
 	make logtail
 
-compile:
+compile: assureconfig
 	docker rm -f coreboot-build; \
 	docker run -i -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-build \
@@ -167,7 +167,7 @@ dfind:
 sfind:
 	docker run --rm -t eyedeekay/tlhab "grep SIZE \$$(grep $(search) \$$(find . -name Kconfig) | sed 's|:.*||g')"
 
-rebuild: child compile copy
+rebuild: clobber assureconfig child compile copy
 
 prebuilts:
 	cd util/ectool; make; cp ectool ../../prebuilt/

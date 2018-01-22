@@ -4,7 +4,7 @@ export PWD = $(shell pwd)
 
 #device ?= i1545
 device ?= m11xr1
-search = NUVOTON
+search = WINBOND
 
 make: $(device)
 
@@ -12,6 +12,10 @@ readout:
 	docker run -i --rm -v $(PWD)/.config:/home/coreboot/coreboot/.config \
 		--name coreboot-readout \
 		-t "eyedeekay/coreboot-dockerfile" 'cat .config'
+
+clobber:
+	docker rm -f coreboot-build; \
+	docker rmi -f eyedeekay/tlhab
 
 clean:
 	rm *log *err
@@ -156,6 +160,9 @@ businfo:
 dfind:
 	docker run --rm -t eyedeekay/tlhab "grep $(search) \$$(find . -name Kconfig)"
 
+sfind:
+	docker run --rm -t eyedeekay/tlhab "grep SIZE \$$(grep $(search) \$$(find . -name Kconfig) | sed 's|:.*||g')"
+
 rebuild: child compile copy
 
 prebuilts:
@@ -198,3 +205,9 @@ m11xr1:
 i1545:
 	cp config-i1545 .config
 	make rebuild
+
+target-m11xr1:
+	docker build --force-rm -f Dockerfiles.targets/Dockerfile.m11xr1 .
+
+target-i1545:
+	docker build --force-rm -f Dockerfiles.targets/Dockerfile.i1545 .

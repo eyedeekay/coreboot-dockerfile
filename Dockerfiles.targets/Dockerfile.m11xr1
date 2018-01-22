@@ -1,0 +1,9 @@
+FROM eyedeekay/coreboot-dockerfile
+USER coreboot
+COPY vendor/alienware /home/coreboot/coreboot/src/mainboard/alienware
+COPY vendor/dell /home/coreboot/coreboot/src/mainboard/dell
+COPY vendor/acer /home/coreboot/coreboot/src/mainboard/acer
+COPY config-m11xr1 /home/coreboot/coreboot/.config
+RUN make oldconfig
+RUN make
+ENTRYPOINT [ "bash", "-i", "-c" ]
